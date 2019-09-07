@@ -1,4 +1,13 @@
 <resources>
     <string name="app_name">HomeTask</string>
     <string name="title_activity_main">MainActivity</string>
+
+    <!--Cadastro-->
+    <string name="nome">Nome</string>
+    <string name="email">E-mail</string>
+    <string name="senha">Senha</string>
+    <string name="conf_senha">Confirmar Senha</string>
+    <string name="salvar">Salvar</string>
+
+
 </resources>

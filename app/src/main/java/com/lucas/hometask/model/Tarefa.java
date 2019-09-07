@@ -1,4 +1,4 @@
-package com.lucas.hometask.Model;
+package com.lucas.hometask.model;
 
 public class Tarefa {
     private int id;
