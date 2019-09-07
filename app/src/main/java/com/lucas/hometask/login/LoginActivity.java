@@ -26,9 +26,7 @@ public class LoginActivity extends AppCompatActivity {
         openFragment(new EntrarFragment());
     }
 
-    public void onClickCadastrar(View view){
-
-    }
+    public void onClickCadastrar(View view){ openFragment(new CadastroUsuarioFragment()); }
 
     public void openFragment(Fragment fragment){
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();

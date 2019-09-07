@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:gravity="center_vertical"
+    android:orientation="vertical">
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/txtNome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="16dp"
         android:ems="10"
         android:hint="@string/nome"
         android:inputType="textPersonName"
@@ -16,9 +20,10 @@
         tools:layout_editor_absoluteY="115dp" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/txtEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="16dp"
         android:ems="10"
         android:hint="@string/email"
         android:inputType="textEmailAddress"
@@ -26,9 +31,10 @@
         tools:layout_editor_absoluteY="187dp" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/txtSenha"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="16dp"
         android:ems="10"
         android:hint="@string/senha"
         android:inputType="textPassword"
@@ -36,9 +42,10 @@
         tools:layout_editor_absoluteY="260dp" />
 
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/txtConfSenha"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="16dp"
         android:ems="10"
         android:hint="@string/conf_senha"
         android:inputType="textPassword"
@@ -46,10 +53,14 @@
         tools:layout_editor_absoluteY="341dp" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_entrar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_marginEnd="176dp"
         android:text="@string/salvar"
-        tools:layout_editor_absoluteX="49dp"
-        tools:layout_editor_absoluteY="427dp" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="439dp" />
+</LinearLayout>
