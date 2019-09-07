@@ -10,7 +10,7 @@
 
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/et_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/et_senha"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
@@ -31,20 +31,20 @@
         android:inputType="numberPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText3" />
+        app:layout_constraintTop_toBottomOf="@+id/et_email" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_esqueciSenha"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="49dp"
         android:text="@string/esqueci_senha"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText4" />
+        app:layout_constraintTop_toBottomOf="@+id/et_senha" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btn_entrar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/entrar"
