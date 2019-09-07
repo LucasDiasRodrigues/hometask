@@ -1,4 +1,18 @@
 <resources>
     <string name="app_name">HomeTask</string>
-    <string name="title_activity_main">MainActivity</string>
+
+
+    <string name="entrar">Entrar</string>
+    <string name="cadastrese">Cadastre-se</string>
+    <string name="title_activity_main">Hometask</string>
+
+
+    <string name="esqueci_senha">Esqueci a senha</string>
+    <string name="email">Email</string>
+    <string name="senha">Senha</string>
+
+
+    <!--Content descriptions-->
+    <string name="logo">Logo do aplicativo</string>
+
 </resources>
