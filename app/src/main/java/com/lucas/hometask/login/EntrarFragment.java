@@ -67,6 +67,10 @@ public class EntrarFragment extends Fragment {
 
         void onRecupSenha();
     }
+
+    public void setFragInterface(EntrarFragInterface fragInterface) {
+        this.fragInterface = fragInterface;
+    }
 }
 
 

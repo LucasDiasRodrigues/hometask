@@ -4,10 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.lucas.hometask.MainActivity;
 import com.lucas.hometask.R;
 
 public class LoginActivity extends AppCompatActivity implements EntrarFragment.EntrarFragInterface {
@@ -22,6 +24,14 @@ public class LoginActivity extends AppCompatActivity implements EntrarFragment.E
 
         btnEntrar = (Button) findViewById(R.id.btn_entrar);
         btnCadastrar = (Button) findViewById(R.id.btn_cadastrar);
+    }
+
+
+    @Override
+    public void onAttachFragment(Fragment fragment) {
+        if(fragment instanceof EntrarFragment){
+            ((EntrarFragment) fragment).setFragInterface(this);
+        }
     }
 
     public void onClickEntrar(View view) {
@@ -40,7 +50,8 @@ public class LoginActivity extends AppCompatActivity implements EntrarFragment.E
 
     @Override
     public void onLoginSuccess() {
-
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
     @Override

@@ -25,4 +25,4 @@
         android:text="@string/salvar"
         tools:layout_editor_absoluteX="152dp"
         tools:layout_editor_absoluteY="326dp" />
-</>
+</LinearLayout>
