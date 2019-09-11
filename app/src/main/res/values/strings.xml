@@ -14,5 +14,7 @@
     <string name="esqueci_senha">Esqueci a senha</string>
     <string name="entrar">Entrar</string>
     <string name="cadastrese">Cadastre-se</string>
+    <string name="sair">Sair</string>
+    <string name="idcasa">ID da casa</string>
 
 </resources>

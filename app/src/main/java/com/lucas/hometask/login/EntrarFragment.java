@@ -62,6 +62,7 @@ public class EntrarFragment extends Fragment {
         };
     }
 
+
     public interface EntrarFragInterface {
         void onLoginSuccess();
 

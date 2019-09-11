@@ -1,11 +1,11 @@
 package com.lucas.hometask.model;
 
-public class Regras {
+public class Regra {
     public int id;
     public String nome;
     public String descricao;
 
-    public Regras(String nome, String descricao) {
+    public Regra(String nome, String descricao) {
         this.nome = nome;
         this.descricao = descricao;
     }

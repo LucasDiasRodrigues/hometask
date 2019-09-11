@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    tools:context=".casa.CadastroCasaActivity"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        tools:context=".casa.CadastroCasaActivity"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingStart="6dp"
+        android:paddingEnd="6dp"
+        android:background="@color/colorPrimary">
+
+        <EditText
+            android:id="@+id/text_nome_casa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+         android:layout_marginHorizontal="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="60dp"
+            android:ems="10"
+            android:textStyle="bold"
+            android:textSize="22sp"
+            android:hint="@string/idcasa"
+            android:inputType="number"
+            android:maxWidth="350dp" />
+
+
+
+
+
+  <com.google.android.material.button.MaterialButton
+      android:id="@+id/btn_cadastrar"
+      android:layout_width="300dp"
+      android:layout_marginBottom="16dp"
+      android:layout_alignParentBottom="true"
+      android:layout_centerHorizontal="true"
+      android:elevation="16dp"
+      android:text="Cadastrar"
+      android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
+      android:backgroundTint="@color/colorAccent"
+      android:layout_height="50dp"/>
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+

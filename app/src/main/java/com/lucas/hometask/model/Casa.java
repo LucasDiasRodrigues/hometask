@@ -7,6 +7,8 @@ public class Casa {
     private String nome;
     private ArrayList<Usuario> moradores;
     private ArrayList<Tarefa> tarefas;
+    private ArrayList<Regra> regras;
+
 
     public Casa(String nome) {
         this.nome = nome;
