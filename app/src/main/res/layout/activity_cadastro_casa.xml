@@ -28,9 +28,25 @@
             android:ems="10"
             android:textStyle="bold"
             android:textSize="22sp"
-            android:hint="@string/idcasa"
+            android:hint="@string/nomecasa"
             android:inputType="number"
             android:maxWidth="350dp" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_below="@+id/text_nome_casa"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:paddingBottom="100dp"
+                app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+                app:spanCount="2"
+                tools:listitem="@layout/casa_item_list"
+                android:layout_height="match_parent"/>
+
+        </androidx.core.widget.NestedScrollView>
 
 
 

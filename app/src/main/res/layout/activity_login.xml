@@ -13,13 +13,13 @@
         android:layout_height="match_parent">
 
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_entrar"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:onClick="onClickEntrar"
             android:text="@string/entrar"
-            android:background="@color/colorAccent"
+            android:backgroundTint="@color/colorAccent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -36,7 +36,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.17000002"
-            tools:srcCompat="@tools:sample/avatars[10]" />
+            tools:srcCompat="@tools:sample/avatars" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
