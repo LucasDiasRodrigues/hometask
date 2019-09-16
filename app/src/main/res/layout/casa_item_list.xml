@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:animateLayoutChanges="true"
     android:orientation="vertical">
 
     <ImageView
@@ -12,4 +13,24 @@
         android:scaleType="centerCrop"
         android:src="@drawable/house_1" />
 
-</FrameLayout>
+    <RelativeLayout
+        android:id="@+id/selected"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignBottom="@+id/image"
+        android:layout_alignLeft="@+id/image"
+        android:layout_alignRight="@+id/image"
+        android:background="@color/colorAccentTransparent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:layout_height="200dp"
+            android:layout_width="200dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/ic_done"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -15,11 +15,14 @@ import androidx.recyclerview.widget.RecyclerView;
 public class CadastroCasaAdapter extends RecyclerView.Adapter<CadastroCasaAdapter.MyViewHolder> {
 
     ArrayList<Integer> list;
+    Integer selectedPosition;
+
     OnItemClickListener callback;
 
     public CadastroCasaAdapter(ArrayList<Integer> list, OnItemClickListener callback) {
         this.callback = callback;
         //this.list = list;
+        selectedPosition = -1;
         this.list = new ArrayList<>();
         this.list.add(1);
         this.list.add(2);
@@ -31,7 +34,6 @@ public class CadastroCasaAdapter extends RecyclerView.Adapter<CadastroCasaAdapte
         this.list.add(8);
         this.list.add(9);
         this.list.add(10);
-
     }
 
     @NonNull
@@ -43,6 +45,10 @@ public class CadastroCasaAdapter extends RecyclerView.Adapter<CadastroCasaAdapte
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+
+        holder.selected.setVisibility(selectedPosition == position ?
+                View.VISIBLE :
+                View.GONE);
 
 
         switch (list.get(position)) {
@@ -77,7 +83,6 @@ public class CadastroCasaAdapter extends RecyclerView.Adapter<CadastroCasaAdapte
                 holder.imageView.setImageResource(R.drawable.house_2);
                 break;
         }
-
     }
 
     @Override
@@ -88,25 +93,32 @@ public class CadastroCasaAdapter extends RecyclerView.Adapter<CadastroCasaAdapte
     public class MyViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
         public ImageView imageView;
+        View selected;
 
         public MyViewHolder(View v) {
             super(v);
             imageView = v.findViewById(R.id.image);
+            selected = v.findViewById(R.id.selected);
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    selected.setVisibility(View.VISIBLE);
+                    int unselectedPosition = -1;
+                    if (selectedPosition != -1)
+                        unselectedPosition = selectedPosition;
+                    selectedPosition = getAdapterPosition();
                     callback.onListClick(list.get(getAdapterPosition()));
+
+                    if (unselectedPosition != -1)
+                        CadastroCasaAdapter.this.notifyItemChanged(unselectedPosition);
                 }
             });
         }
     }
 
     public interface OnItemClickListener {
-
         void onListClick(Integer integer);
     }
-
-
 }
 
 

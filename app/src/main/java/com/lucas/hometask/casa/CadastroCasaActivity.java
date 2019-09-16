@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.os.Bundle;
 
-
 import com.google.android.material.button.MaterialButton;
 import com.lucas.hometask.R;
 
@@ -19,7 +18,6 @@ public class CadastroCasaActivity extends AppCompatActivity implements CadastroC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_casa);
-
 
         btnCadastrar = findViewById(R.id.btn_cadastrar);
         recyclerView = findViewById(R.id.recycler_view);
@@ -36,9 +34,6 @@ public class CadastroCasaActivity extends AppCompatActivity implements CadastroC
 
     @Override
     public void onListClick(Integer integer) {
-
         //todo Item clickado
     }
-
-
 }
