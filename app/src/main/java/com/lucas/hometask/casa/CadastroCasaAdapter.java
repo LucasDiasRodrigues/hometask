@@ -103,17 +103,21 @@ public class CadastroCasaAdapter extends RecyclerView.Adapter<CadastroCasaAdapte
                 @Override
                 public void onClick(View v) {
                     selected.setVisibility(View.VISIBLE);
-                    int unselectedPosition = -1;
-                    if (selectedPosition != -1)
-                        unselectedPosition = selectedPosition;
-                    selectedPosition = getAdapterPosition();
+                    changeSelectedItem(getAdapterPosition());
                     callback.onListClick(list.get(getAdapterPosition()));
-
-                    if (unselectedPosition != -1)
-                        CadastroCasaAdapter.this.notifyItemChanged(unselectedPosition);
                 }
             });
         }
+    }
+
+    public void changeSelectedItem(int adapterposition){
+        int unselectedPosition = -1;
+        if (selectedPosition != -1)
+            unselectedPosition = selectedPosition;
+        selectedPosition = adapterposition;
+
+        if (unselectedPosition != -1)
+            CadastroCasaAdapter.this.notifyItemChanged(unselectedPosition);
     }
 
     public interface OnItemClickListener {

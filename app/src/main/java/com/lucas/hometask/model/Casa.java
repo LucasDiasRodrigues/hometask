@@ -3,8 +3,9 @@ package com.lucas.hometask.model;
 import java.util.ArrayList;
 
 public class Casa {
-    private int id;
+    private String id;
     private String nome;
+    private String imagem;
     private ArrayList<Usuario> moradores;
     private ArrayList<Tarefa> tarefas;
     private ArrayList<Regra> regras;
@@ -14,16 +15,16 @@ public class Casa {
         this.nome = nome;
     }
 
-    public Casa(int id, String nome) {
+    public Casa(String id, String nome) {
         this.id = id;
         this.nome = nome;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

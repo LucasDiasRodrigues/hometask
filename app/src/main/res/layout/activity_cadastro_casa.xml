@@ -59,6 +59,7 @@
       android:layout_alignParentBottom="true"
       android:layout_centerHorizontal="true"
       android:elevation="16dp"
+      android:onClick="onClickSave"
       android:text="Cadastrar"
       android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
       android:backgroundTint="@color/colorAccent"
