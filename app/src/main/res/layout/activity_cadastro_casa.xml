@@ -1,75 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    tools:context=".casa.CadastroCasaActivity"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context=".casa.CadastroCasaActivity">
 
-
-    <RelativeLayout
-        tools:context=".casa.CadastroCasaActivity"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         android:paddingStart="6dp"
         android:paddingEnd="6dp"
-        android:background="@color/colorPrimary">
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        tools:context=".casa.CadastroCasaActivity">
 
         <EditText
             android:id="@+id/text_nome_casa"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-         android:layout_marginHorizontal="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="6dp"
+            android:layout_marginTop="20dp"
             android:ems="10"
-            android:textStyle="bold"
-            android:textSize="22sp"
             android:hint="@string/nomecasa"
-            android:inputType="number"
-            android:maxWidth="350dp" />
+            android:inputType="textPersonName"
+            android:maxWidth="350dp"
+            android:textColorHint="@android:color/black"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:text="Aparência:"
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:visibility="gone"
+            android:background="@color/colorPrimaryDark"/>
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_below="@+id/text_nome_casa"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_below="@+id/text_nome_casa">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view"
                 android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:paddingBottom="100dp"
                 app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
                 app:spanCount="2"
-                tools:listitem="@layout/casa_item_list"
-                android:layout_height="match_parent"/>
-
+                tools:listitem="@layout/casa_item_list" />
         </androidx.core.widget.NestedScrollView>
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_cadastrar"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/colorAccent"
+            android:elevation="16dp"
+            android:onClick="onClickSave"
+            android:text="Cadastrar"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Button" />
+    </LinearLayout>
 
 
-
-
-  <com.google.android.material.button.MaterialButton
-      android:id="@+id/btn_cadastrar"
-      android:layout_width="300dp"
-      android:layout_marginBottom="16dp"
-      android:layout_alignParentBottom="true"
-      android:layout_centerHorizontal="true"
-      android:elevation="16dp"
-      android:onClick="onClickSave"
-      android:text="Cadastrar"
-      android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
-      android:backgroundTint="@color/colorAccent"
-      android:layout_height="50dp"/>
-    </RelativeLayout>
-
-    <FrameLayout
-        android:id="@+id/fragment_container"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        app:elevation="0dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="Crie sua casa"
+            app:titleTextColor="@android:color/black"
+
+            />
+    </com.google.android.material.appbar.AppBarLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

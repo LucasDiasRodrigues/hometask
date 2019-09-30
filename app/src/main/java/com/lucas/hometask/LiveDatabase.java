@@ -1,9 +1,14 @@
 package com.lucas.hometask;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.lucas.hometask.model.Casa;
 import com.lucas.hometask.model.Usuario;
+
+import androidx.annotation.NonNull;
 
 public class LiveDatabase {
 
@@ -18,7 +23,6 @@ public class LiveDatabase {
     private static final String FIELD_CASA_IMAGEM = "imagem";
     private static final String FIELD_CASA_MORADORES = "moradores";
 
-
     private FirebaseDatabase database;
 
     public LiveDatabase(){
@@ -29,8 +33,25 @@ public class LiveDatabase {
         database = FirebaseDatabase.getInstance();
     }
 
-    public void createUser(Usuario usuario){
-        DatabaseReference usuarioRef = database.getReference(PATH_USUARIOS).child(usuario.getEmail());
+    public void createUserIfDontExists(final Usuario usuario){
+        database.getReference(PATH_USUARIOS).child(usuario.getId())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.getValue() == null){
+                            createUser(usuario);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+    }
+
+    private void createUser(Usuario usuario){
+        DatabaseReference usuarioRef = database.getReference(PATH_USUARIOS).child(usuario.getId());
         usuarioRef.child(FIELD_USUARIO_NOME).setValue(usuario.getNome());
         //usuarioRef.child(FIELD_USUARIO_IMAGEM).setValue(usuario.getNome());
     }
@@ -40,16 +61,16 @@ public class LiveDatabase {
         casa.setId(casaRef.getKey());
 
         casaRef.child(FIELD_CASA_NOME).setValue(casa.getNome());
-        casaRef.child(FIELD_CASA_IMAGEM).setValue(casa.getNome());
+        casaRef.child(FIELD_CASA_IMAGEM).setValue(casa.getImagem());
 
         Usuario criador = casa.getMoradores().get(0);
-        casaRef.child(FIELD_CASA_MORADORES).child(criador.getEmail()).setValue(criador.getNome());
+        casaRef.child(FIELD_CASA_MORADORES).child(criador.getId()).setValue(criador.getNome());
 
         saveCasaOnUserData(criador, casa);
     }
 
     private void saveCasaOnUserData(Usuario usuario, Casa casa){
-        DatabaseReference usuarioRef = database.getReference(PATH_USUARIOS).child(usuario.getEmail());
+        DatabaseReference usuarioRef = database.getReference(PATH_USUARIOS).child(usuario.getId());
         usuarioRef.child(FIELD_USUARIO_CASA).setValue(casa.getId());
     }
 }

@@ -43,4 +43,12 @@ public class Casa {
     public void setMoradores(ArrayList<Usuario> moradores) {
         this.moradores = moradores;
     }
+
+    public String getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
+    }
 }

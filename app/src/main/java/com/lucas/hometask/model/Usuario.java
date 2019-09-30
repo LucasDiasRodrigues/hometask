@@ -1,6 +1,7 @@
 package com.lucas.hometask.model;
 
 public class Usuario {
+    private String id;
     private String nome;
     private String email;
     private String senha;
@@ -44,5 +45,13 @@ public class Usuario {
 
     public void setIdCasa(int idCasa) {
         this.idCasa = idCasa;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
