@@ -42,6 +42,9 @@ public class CadastroCasaActivity extends AppCompatActivity implements CadastroC
 
         }
         btnCadastrar = findViewById(R.id.btn_cadastrar);
+        if(imagem != null) btnCadastrar.setEnabled(true);
+
+
         textNome = findViewById(R.id.text_nome_casa);
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
@@ -94,6 +97,7 @@ public class CadastroCasaActivity extends AppCompatActivity implements CadastroC
     public void onListClick(Integer integer) {
         //todo Item clickado
         imagem = integer.toString();
+        btnCadastrar.setEnabled(true);
     }
 
     @Override
