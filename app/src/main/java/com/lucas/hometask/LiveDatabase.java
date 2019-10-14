@@ -73,4 +73,12 @@ public class LiveDatabase {
         DatabaseReference usuarioRef = database.getReference(PATH_USUARIOS).child(usuario.getId());
         usuarioRef.child(FIELD_USUARIO_CASA).setValue(casa.getId());
     }
+
+    public void getUserData(Usuario usuario, ValueEventListener listener){
+        database.getReference(PATH_USUARIOS).child(usuario.getId()).addListenerForSingleValueEvent(listener);
+    }
+
+    public void getHouseById(){
+
+    }
 }

@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
     tools:context=".MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -22,16 +21,48 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:onClick="onClickCadastrarCasa"
-        app:rippleColor="@color/colorPrimaryDark"
-        android:backgroundTint="@color/colorAccent"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnHomecasa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:backgroundTint="@color/colorAccent"
+            android:layout_margin="6dp"
+            android:text="Home Casa"
+            android:onClick="onClickHomeCasa"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnCadastroCasa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:backgroundTint="@color/colorAccent"
+            android:layout_margin="6dp"
+            android:onClick="onClickCadastrarCasa"
+            android:text="Cadastro Casa"
+            />
+
+
+
+
+
+    </LinearLayout>
+
+<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--        android:id="@+id/fab"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="bottom|end"-->
+<!--        android:onClick="onClickCadastrarCasa"-->
+<!--        app:rippleColor="@color/colorPrimaryDark"-->
+<!--        android:backgroundTint="@color/colorAccent"-->
+<!--        android:layout_margin="@dimen/fab_margin"-->
+<!--        app:srcCompat="@android:drawable/ic_dialog_email" />-->
 
     <include layout="@layout/content_main" />
 

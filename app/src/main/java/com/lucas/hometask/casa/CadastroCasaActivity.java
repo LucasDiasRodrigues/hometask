@@ -3,11 +3,14 @@ package com.lucas.hometask.casa;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -36,16 +39,34 @@ public class CadastroCasaActivity extends AppCompatActivity implements CadastroC
         setContentView(R.layout.activity_cadastro_casa);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        if(getSupportActionBar() != null){
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         }
         btnCadastrar = findViewById(R.id.btn_cadastrar);
-        if(imagem != null) btnCadastrar.setEnabled(true);
-
+        if (imagem != null) btnCadastrar.setEnabled(true);
 
         textNome = findViewById(R.id.text_nome_casa);
+        textNome.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(s.toString().equals("") && imagem != null){
+                    btnCadastrar.setEnabled(true);
+                } else {
+                    btnCadastrar.setEnabled(false);
+                }
+            }
+        });
+
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
 
@@ -53,6 +74,8 @@ public class CadastroCasaActivity extends AppCompatActivity implements CadastroC
 
         StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
+
+        new LinearLayoutManager(this, RecyclerView.VERTICAL,false);
 
         CadastroCasaAdapter adapter = new CadastroCasaAdapter(null, this);//todo lista de imagens
         recyclerView.setAdapter(adapter);
@@ -97,7 +120,8 @@ public class CadastroCasaActivity extends AppCompatActivity implements CadastroC
     public void onListClick(Integer integer) {
         //todo Item clickado
         imagem = integer.toString();
-        btnCadastrar.setEnabled(true);
+        if (!textNome.getText().toString().equals("")) btnCadastrar.setEnabled(true);
+
     }
 
     @Override

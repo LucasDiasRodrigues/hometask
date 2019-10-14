@@ -17,4 +17,9 @@
     <string name="sair">Sair</string>
     <string name="nomecasa">Nome da casa</string>
 
+    <string-array name="casa_abas">
+        <item>Tarefas</item>
+        <item>Regras</item>
+        <item>Moradores</item>
+    </string-array>
 </resources>

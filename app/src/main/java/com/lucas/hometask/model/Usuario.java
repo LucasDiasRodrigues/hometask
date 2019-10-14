@@ -5,7 +5,7 @@ public class Usuario {
     private String nome;
     private String email;
     private String senha;
-    private int idCasa;
+    private String idCasa;
 
     public Usuario(String nome, String email) {
         this.nome = nome;
@@ -39,11 +39,11 @@ public class Usuario {
 
     }
 
-    public int getIdCasa() {
+    public String getIdCasa() {
         return idCasa;
     }
 
-    public void setIdCasa(int idCasa) {
+    public void setIdCasa(String idCasa) {
         this.idCasa = idCasa;
     }
 
