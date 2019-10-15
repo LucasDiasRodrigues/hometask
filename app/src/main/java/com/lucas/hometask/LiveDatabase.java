@@ -8,6 +8,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.lucas.hometask.model.Casa;
 import com.lucas.hometask.model.Usuario;
 
+import java.util.ArrayList;
+
 import androidx.annotation.NonNull;
 
 public class LiveDatabase {
@@ -25,20 +27,44 @@ public class LiveDatabase {
 
     private FirebaseDatabase database;
 
-    public LiveDatabase(){
+    private static DatabaseChangeListener databaseChangeListener;
+
+    private Usuario usuario;
+    private Casa casa;
+
+    private static LiveDatabase liveDatabase;
+
+    public static LiveDatabase getInstance() {
+        if (liveDatabase == null)
+            liveDatabase = new LiveDatabase();
+        return liveDatabase;
+    }
+
+    public static LiveDatabase getInstance(DatabaseChangeListener databaseChangeListener) {
+        LiveDatabase.databaseChangeListener = databaseChangeListener;
+        if (liveDatabase == null)
+            liveDatabase = new LiveDatabase();
+        return liveDatabase;
+    }
+
+    public static void setDatabaseChangeListener(DatabaseChangeListener databaseChangeListener) {
+        LiveDatabase.databaseChangeListener = databaseChangeListener;
+    }
+
+    private LiveDatabase() {
         getDatabaseInstance();
     }
 
-    private void getDatabaseInstance(){
+    private void getDatabaseInstance() {
         database = FirebaseDatabase.getInstance();
     }
 
-    public void createUserIfDontExists(final Usuario usuario){
+    public void createUserIfDontExists(final Usuario usuario) {
         database.getReference(PATH_USUARIOS).child(usuario.getId())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.getValue() == null){
+                        if (dataSnapshot.getValue() == null) {
                             createUser(usuario);
                         }
                     }
@@ -50,13 +76,13 @@ public class LiveDatabase {
                 });
     }
 
-    private void createUser(Usuario usuario){
+    private void createUser(Usuario usuario) {
         DatabaseReference usuarioRef = database.getReference(PATH_USUARIOS).child(usuario.getId());
         usuarioRef.child(FIELD_USUARIO_NOME).setValue(usuario.getNome());
         //usuarioRef.child(FIELD_USUARIO_IMAGEM).setValue(usuario.getNome());
     }
 
-    public void createNewCasa(Casa casa){
+    public void createNewCasa(Casa casa) {
         DatabaseReference casaRef = database.getReference(PATH_CASAS).push();
         casa.setId(casaRef.getKey());
 
@@ -69,16 +95,81 @@ public class LiveDatabase {
         saveCasaOnUserData(criador, casa);
     }
 
-    private void saveCasaOnUserData(Usuario usuario, Casa casa){
+    private void saveCasaOnUserData(Usuario usuario, Casa casa) {
         DatabaseReference usuarioRef = database.getReference(PATH_USUARIOS).child(usuario.getId());
         usuarioRef.child(FIELD_USUARIO_CASA).setValue(casa.getId());
     }
 
-    public void getUserData(Usuario usuario, ValueEventListener listener){
-        database.getReference(PATH_USUARIOS).child(usuario.getId()).addListenerForSingleValueEvent(listener);
+//    public void getUserData(Usuario usuario, ValueEventListener listener) {
+//        database.getReference(PATH_USUARIOS).child(usuario.getId()).addListenerForSingleValueEvent(listener);
+//    }
+
+    private void updateUserData(final Usuario user) {
+        if (usuario == null) this.usuario = user;
+        else usuario.setId(user.getId());
+
+        database.getReference(PATH_USUARIOS).child(usuario.getId())
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        //todo acrescentar outros dados do usuario além da casa
+                        if (dataSnapshot.child("casa").getValue() != null) {
+                            usuario.setIdCasa((String) dataSnapshot.child("casa").getValue());
+
+                            getHouseById(usuario.getIdCasa());
+                        }
+                        if(databaseChangeListener != null) databaseChangeListener.onUserDataChanged(usuario);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
     }
 
-    public void getHouseById(){
+    public void getHouseById(String houseId) {
+        if(casa == null) casa = new Casa();
+        casa.setId(houseId);
 
+        database.getReference(PATH_CASAS).child(houseId)
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.exists()){
+                            casa.setNome((String) dataSnapshot.child(FIELD_CASA_NOME).getValue());
+                            casa.setImagem((String) dataSnapshot.child(FIELD_CASA_IMAGEM).getValue());
+                            //moradores
+                            if(dataSnapshot.child(FIELD_CASA_MORADORES).getChildrenCount() > 1){
+                                ArrayList<Usuario> moradores = new ArrayList<>();
+                                for(DataSnapshot morador : dataSnapshot.child(FIELD_CASA_MORADORES).getChildren()){
+                                    Usuario user = new Usuario();
+                                    user.setId(morador.getKey());
+                                    user.setNome((String) morador.getValue());
+                                    casa.addMorador(user);
+                                }
+                            }
+                        }
+                        if(databaseChangeListener != null) databaseChangeListener.onHouseDataChanged(casa);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+    }
+
+    public void getPersistentUserData(Usuario usuario) {
+        updateUserData(usuario);
+    }
+
+
+    public interface DatabaseChangeListener {
+        void onUserDataChanged(Usuario usuario);
+
+        void onHouseDataChanged(Casa casa);
     }
 }
+
+

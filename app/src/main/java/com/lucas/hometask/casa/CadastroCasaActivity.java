@@ -96,7 +96,7 @@ public class CadastroCasaActivity extends AppCompatActivity implements CadastroC
             moradores.add(usuario);
             casa.setMoradores(moradores);
 
-            LiveDatabase database = new LiveDatabase();
+            LiveDatabase database = LiveDatabase.getInstance();
             database.createNewCasa(casa);
 
             showDialogCasaSaved();

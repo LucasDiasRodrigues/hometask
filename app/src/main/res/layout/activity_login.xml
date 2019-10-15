@@ -38,15 +38,6 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <View
-        android:layout_width="50dp"
-        android:clickable="true"
-        android:contentDescription="continuar"
-        android:focusable="true"
-        android:layout_gravity="center"
-        android:layout_height="50dp"
-        android:background="@android:color/holo_purple"/>
-
     <FrameLayout
         android:id="@+id/frame_layout"
         android:layout_width="match_parent"

@@ -15,6 +15,9 @@ public class Casa {
         this.nome = nome;
     }
 
+    public Casa() {
+    }
+
     public Casa(String id, String nome) {
         this.id = id;
         this.nome = nome;
@@ -42,6 +45,11 @@ public class Casa {
 
     public void setMoradores(ArrayList<Usuario> moradores) {
         this.moradores = moradores;
+    }
+
+    public void addMorador(Usuario morador){
+        if(moradores == null) moradores = new ArrayList<>();
+        moradores.add(morador);
     }
 
     public String getImagem() {

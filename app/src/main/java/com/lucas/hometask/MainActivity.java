@@ -16,6 +16,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.lucas.hometask.casa.CadastroCasaActivity;
 import com.lucas.hometask.casa.CasaActivity;
 import com.lucas.hometask.login.LoginActivity;
+import com.lucas.hometask.model.Casa;
 import com.lucas.hometask.model.Usuario;
 
 import androidx.annotation.NonNull;
@@ -26,11 +27,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements LiveDatabase.DatabaseChangeListener {
 
     static boolean hasHouse;
-    private LiveDatabase database = new LiveDatabase();
+    private LiveDatabase database = LiveDatabase.getInstance(this);
     private Usuario usuario;
+
+    private View progress;
+    private View content;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,17 +43,17 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        progress = findViewById(R.id.progress);
+        content = findViewById(R.id.content);
+
         usuario = new Usuario(
                 FirebaseAuth.getInstance().getCurrentUser().getDisplayName(),
                 FirebaseAuth.getInstance().getCurrentUser().getEmail());
         usuario.setId(FirebaseAuth.getInstance().getCurrentUser().getUid());
 
-     //   FloatingActionButton fab = findViewById(R.id.fab);
+        //   FloatingActionButton fab = findViewById(R.id.fab);
 
         getUserData();
-
-        findViewById(R.id.btnCadastroCasa).setEnabled(!hasHouse);
-        findViewById(R.id.btnHomecasa).setEnabled(hasHouse);
 
     }
 
@@ -61,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.menu_sair){
+        if (item.getItemId() == R.id.menu_sair) {
             AuthUI.getInstance()
                     .signOut(this)
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -75,30 +79,53 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    public void getUserData(){
-        database.getUserData(usuario, new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.child("casa").getValue() != null) {
-                    usuario.setIdCasa((String) dataSnapshot.child("casa").getValue());
-                    hasHouse = true;
-                } else {
-                    hasHouse = false;
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                hasHouse = false;
-            }
-        });
+    public void getUserData() {
+        database.getPersistentUserData(usuario);
+//        database.getUserData(usuario, new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                if(dataSnapshot.child("casa").getValue() != null) {
+//                    usuario.setIdCasa((String) dataSnapshot.child("casa").getValue());
+//                    hasHouse = true;
+//                } else {
+//                    hasHouse = false;
+//                }
+//
+//                findViewById(R.id.btnCadastroCasa).setEnabled(!hasHouse);
+//                findViewById(R.id.btnHomecasa).setEnabled(hasHouse);
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//                hasHouse = false;
+//            }
+//        });
     }
 
-    public void onClickCadastrarCasa(View view){
+
+    public void onClickCadastrarCasa(View view) {
         startActivity(new Intent(MainActivity.this, CadastroCasaActivity.class));
     }
 
-    public void onClickHomeCasa(View view){
+    public void onClickHomeCasa(View view) {
         startActivity(new Intent(MainActivity.this, CasaActivity.class));
+    }
+
+
+    @Override
+    public void onUserDataChanged(Usuario usuario) {
+        this.usuario = usuario;
+        hasHouse = usuario.getIdCasa() != null;
+
+        findViewById(R.id.btnCadastroCasa).setEnabled(!hasHouse);
+        findViewById(R.id.btnHomecasa).setEnabled(hasHouse);
+
+        progress.setVisibility(View.GONE);
+        content.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onHouseDataChanged(Casa casa) {
+
     }
 }
