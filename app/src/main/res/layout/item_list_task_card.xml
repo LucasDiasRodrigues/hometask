@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.lucas.hometask.util.MaskedCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="80dp"
+    android:layout_marginStart="6dp"
+    android:layout_marginTop="6dp"
+    android:layout_marginBottom="6dp"
+    android:orientation="vertical"
+    app:contentPadding="0dp"
+    android:layout_gravity="end"
+    app:cardPreventCornerOverlap="false"
+    app:shapeAppearance="@style/TaskCardList">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/house_2"
+           />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:minWidth="160dp"
+            android:layout_gravity="center"
+            android:textSize="21sp"
+            android:layout_margin="12dp"
+            android:gravity="center"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="LAlalalalalall"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+</com.lucas.hometask.util.MaskedCardView>

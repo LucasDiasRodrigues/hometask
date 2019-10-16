@@ -17,7 +17,9 @@ import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
+import com.lucas.hometask.LiveDatabase;
 import com.lucas.hometask.R;
+import com.lucas.hometask.model.Casa;
 
 public class CasaActivity extends AppCompatActivity {
 
@@ -30,8 +32,9 @@ public class CasaActivity extends AppCompatActivity {
     private FloatingActionButton fabRegras;
     private FloatingActionButton fabMoradores;
 
-
     private CasaViewPagerAdapter adapter;
+
+    private Casa casa = LiveDatabase.getInstance().getCasa();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +48,9 @@ public class CasaActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         }
+
+        collapsingToolbar = findViewById(R.id.collapsingToolbar);
+        collapsingToolbar.setTitle(casa.getNome());
 
         viewPager = findViewById(R.id.viewPager);
         viewPager.setAdapter(new CasaViewPagerAdapter(getSupportFragmentManager(),

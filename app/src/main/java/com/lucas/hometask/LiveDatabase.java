@@ -104,21 +104,22 @@ public class LiveDatabase {
 //        database.getReference(PATH_USUARIOS).child(usuario.getId()).addListenerForSingleValueEvent(listener);
 //    }
 
-    private void updateUserData(final Usuario user) {
-        if (usuario == null) this.usuario = user;
-        else usuario.setId(user.getId());
 
-        database.getReference(PATH_USUARIOS).child(usuario.getId())
+    private void updateUserData(final Usuario user) {
+        if (getUsuario() == null) this.usuario = user;
+        else getUsuario().setId(user.getId());
+
+        database.getReference(PATH_USUARIOS).child(getUsuario().getId())
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         //todo acrescentar outros dados do usuario além da casa
                         if (dataSnapshot.child("casa").getValue() != null) {
-                            usuario.setIdCasa((String) dataSnapshot.child("casa").getValue());
+                            getUsuario().setIdCasa((String) dataSnapshot.child("casa").getValue());
 
-                            getHouseById(usuario.getIdCasa());
+                            getHouseById(getUsuario().getIdCasa());
                         }
-                        if(databaseChangeListener != null) databaseChangeListener.onUserDataChanged(usuario);
+                        if(databaseChangeListener != null) databaseChangeListener.onUserDataChanged(getUsuario());
                     }
 
                     @Override
@@ -129,16 +130,16 @@ public class LiveDatabase {
     }
 
     public void getHouseById(String houseId) {
-        if(casa == null) casa = new Casa();
-        casa.setId(houseId);
+        if(getCasa() == null) casa = new Casa();
+        getCasa().setId(houseId);
 
         database.getReference(PATH_CASAS).child(houseId)
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if(dataSnapshot.exists()){
-                            casa.setNome((String) dataSnapshot.child(FIELD_CASA_NOME).getValue());
-                            casa.setImagem((String) dataSnapshot.child(FIELD_CASA_IMAGEM).getValue());
+                            getCasa().setNome((String) dataSnapshot.child(FIELD_CASA_NOME).getValue());
+                            getCasa().setImagem((String) dataSnapshot.child(FIELD_CASA_IMAGEM).getValue());
                             //moradores
                             if(dataSnapshot.child(FIELD_CASA_MORADORES).getChildrenCount() > 1){
                                 ArrayList<Usuario> moradores = new ArrayList<>();
@@ -146,11 +147,11 @@ public class LiveDatabase {
                                     Usuario user = new Usuario();
                                     user.setId(morador.getKey());
                                     user.setNome((String) morador.getValue());
-                                    casa.addMorador(user);
+                                    getCasa().addMorador(user);
                                 }
                             }
                         }
-                        if(databaseChangeListener != null) databaseChangeListener.onHouseDataChanged(casa);
+                        if(databaseChangeListener != null) databaseChangeListener.onHouseDataChanged(getCasa());
                     }
 
                     @Override
@@ -164,10 +165,16 @@ public class LiveDatabase {
         updateUserData(usuario);
     }
 
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public Casa getCasa() {
+        return casa;
+    }
 
     public interface DatabaseChangeListener {
         void onUserDataChanged(Usuario usuario);
-
         void onHouseDataChanged(Casa casa);
     }
 }
