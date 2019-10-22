@@ -10,6 +10,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -81,8 +82,9 @@ public class CasaActivity extends AppCompatActivity {
         fabMoradores = findViewById(R.id.fabMoradores);
     }
 
-    public void changeActiveFab(int position){
-        switch (position){
+
+    public void changeActiveFab(int position) {
+        switch (position) {
             case 0:
                 fabRegras.hide();
                 fabMoradores.hide();
@@ -91,9 +93,9 @@ public class CasaActivity extends AppCompatActivity {
                 fabRegras.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        fabRegras.show();
+                        if (viewPager.getCurrentItem() == 1) fabRegras.show();
                     }
-                },300);
+                }, 300);
                 fabMoradores.hide();
                 break;
             case 2:
@@ -101,10 +103,20 @@ public class CasaActivity extends AppCompatActivity {
                 fabMoradores.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        fabMoradores.show();
+                        if (viewPager.getCurrentItem() == 2) fabMoradores.show();
                     }
                 }, 300);
                 break;
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

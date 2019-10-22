@@ -7,8 +7,12 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="shapeAppearanceSmallComponent">@style/SmallComponent</item>
         <item name="shapeAppearanceMediumComponent">@style/MediumComponent</item>
-
         <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.TransparentStatusBar" parent="AppTheme">
+        <item name="colorPrimaryDark">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 
     <style name="AppTheme2" parent="Theme.MaterialComponents.Light.NoActionBar">
@@ -46,7 +50,6 @@
         <item name="cornerSizeBottomRight">0dp</item>
         <item name="cornerSizeBottomLeft">0dp</item>
 
-
         <item name="cornerSize">21dp</item>
     </style>
 
@@ -54,5 +57,4 @@
         <item name="cornerFamily">cut</item>
         <item name="cornerSize">8dp</item>
     </style>
-
 </resources>

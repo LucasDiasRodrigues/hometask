@@ -8,7 +8,8 @@
     android:layout_marginTop="6dp"
     android:layout_marginBottom="6dp"
     android:orientation="vertical"
-    app:contentPadding="0dp"
+    app:strokeWidth="1dp"
+    app:strokeColor="@color/colorPrimary"
     android:layout_gravity="end"
     app:cardPreventCornerOverlap="false"
     app:shapeAppearance="@style/TaskCardList">
@@ -33,7 +34,7 @@
             android:gravity="center"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="LAlalalalalall"
+            android:text="Cozinha"
             android:layout_height="wrap_content"/>
     </LinearLayout>
 
