@@ -29,8 +29,8 @@ public class LiveDatabase {
 
     private static DatabaseChangeListener databaseChangeListener;
 
-    private Usuario usuario;
-    private Casa casa;
+    private static Usuario usuario;
+    private static Casa casa;
 
     private static LiveDatabase liveDatabase;
 
@@ -90,7 +90,14 @@ public class LiveDatabase {
         casaRef.child(FIELD_CASA_IMAGEM).setValue(casa.getImagem());
 
         Usuario criador = casa.getMoradores().get(0);
-        casaRef.child(FIELD_CASA_MORADORES).child(criador.getId()).setValue(criador.getNome());
+        casaRef.child(FIELD_CASA_MORADORES)
+                .child(criador.getId())
+                .child(FIELD_USUARIO_NOME)
+                .setValue(criador.getNome());
+        casaRef.child(FIELD_CASA_MORADORES)
+                .child(criador.getId())
+                .child(FIELD_CASA_IMAGEM)
+                .setValue(criador.getImagem());
 
         saveCasaOnUserData(criador, casa);
     }
@@ -131,23 +138,24 @@ public class LiveDatabase {
 
     public void getHouseById(String houseId) {
         if(getCasa() == null) casa = new Casa();
-        getCasa().setId(houseId);
+        casa.setId(houseId);
 
         database.getReference(PATH_CASAS).child(houseId)
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if(dataSnapshot.exists()){
-                            getCasa().setNome((String) dataSnapshot.child(FIELD_CASA_NOME).getValue());
-                            getCasa().setImagem((String) dataSnapshot.child(FIELD_CASA_IMAGEM).getValue());
+                            casa.setNome((String) dataSnapshot.child(FIELD_CASA_NOME).getValue());
+                            casa.setImagem((String) dataSnapshot.child(FIELD_CASA_IMAGEM).getValue());
                             //moradores
-                            if(dataSnapshot.child(FIELD_CASA_MORADORES).getChildrenCount() > 1){
+                            if(dataSnapshot.child(FIELD_CASA_MORADORES).getChildrenCount() >= 1){
                                 ArrayList<Usuario> moradores = new ArrayList<>();
                                 for(DataSnapshot morador : dataSnapshot.child(FIELD_CASA_MORADORES).getChildren()){
                                     Usuario user = new Usuario();
                                     user.setId(morador.getKey());
-                                    user.setNome((String) morador.getValue());
-                                    getCasa().addMorador(user);
+                                    user.setNome((String) morador.child(FIELD_USUARIO_NOME).getValue());
+                                    //todo setImagem
+                                    casa.addMorador(user);
                                 }
                             }
                         }

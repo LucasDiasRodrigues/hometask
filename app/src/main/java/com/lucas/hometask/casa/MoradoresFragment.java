@@ -1,11 +1,16 @@
 package com.lucas.hometask.casa;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.lucas.hometask.LiveDatabase;
 import com.lucas.hometask.R;
+import com.lucas.hometask.model.Usuario;
+
+import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,6 +23,7 @@ public class MoradoresFragment extends Fragment implements MoradoresListAdapter.
 
     RecyclerView recyclerView;
     MoradoresListAdapter adapter;
+    ArrayList<Usuario> moradores;
 
     @Nullable
     @Override
@@ -27,15 +33,24 @@ public class MoradoresFragment extends Fragment implements MoradoresListAdapter.
         recyclerView = view.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(1, LinearLayoutManager.VERTICAL));
 
-        adapter = new MoradoresListAdapter(null, this);
-        recyclerView.setAdapter(adapter);
+        getMoradores();
+
 
 
         return view;
     }
 
+    private void getMoradores() {
+        moradores = LiveDatabase.getInstance().getCasa().getMoradores();
+        Log.i("casa", LiveDatabase.getInstance().getCasa().toString());
+
+
+        adapter = new MoradoresListAdapter(moradores, this);
+        recyclerView.setAdapter(adapter);
+    }
+
     @Override
-    public void onListClick(Integer integer) {
+    public void onListClick(Usuario morador) {
 
     }
 }

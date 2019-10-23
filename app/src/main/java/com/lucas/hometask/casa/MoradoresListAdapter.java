@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.lucas.hometask.R;
 import com.lucas.hometask.model.Regra;
+import com.lucas.hometask.model.Usuario;
 
 import java.util.ArrayList;
 
@@ -16,20 +17,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MoradoresListAdapter extends RecyclerView.Adapter<MoradoresListAdapter.MyViewHolder> {
 
-    ArrayList<Integer> list;
-    Integer selectedPosition;
-
+    ArrayList<Usuario> list;
     MoradoresListAdapter.OnItemClickListener callback;
 
-    public MoradoresListAdapter(ArrayList<Regra> list, MoradoresListAdapter.OnItemClickListener callback) {
+    public MoradoresListAdapter(ArrayList<Usuario> list, MoradoresListAdapter.OnItemClickListener callback) {
         this.callback = callback;
-        //this.list = list;
-        this.list = new ArrayList<>();
-        this.list.add(1);
-        this.list.add(2);
-        this.list.add(3);
-        this.list.add(4);
-        this.list.add(5);
+        this.list = list;
     }
 
 
@@ -43,6 +36,7 @@ public class MoradoresListAdapter extends RecyclerView.Adapter<MoradoresListAdap
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         //todo
+        holder.name.setText(list.get(position).getNome());
     }
 
     @Override
@@ -69,6 +63,6 @@ public class MoradoresListAdapter extends RecyclerView.Adapter<MoradoresListAdap
     }
 
     public interface OnItemClickListener {
-        void onListClick(Integer integer);
+        void onListClick(Usuario morador);
     }
 }

@@ -4,8 +4,8 @@ public class Usuario {
     private String id;
     private String nome;
     private String email;
-    private String senha;
     private String idCasa;
+    private String imagem;
 
     public Usuario() {
     }
@@ -31,17 +31,6 @@ public class Usuario {
         this.email = email;
     }
 
-
-    public void setSenha(String senha) {
-        if (senha.length() >= 6) {
-            this.senha = senha;
-        } else {
-            //todo Tratamento de senha
-        }
-
-
-    }
-
     public String getIdCasa() {
         return idCasa;
     }
@@ -56,5 +45,13 @@ public class Usuario {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
     }
 }
