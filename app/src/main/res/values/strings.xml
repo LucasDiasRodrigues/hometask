@@ -17,6 +17,15 @@
     <string name="sair">Sair</string>
     <string name="nomecasa">Nome da casa</string>
 
+    <string name="bem_vindo">Bem vindo!</string>
+    <string name="bem_vindo_nome">Bem vindo %s!</string>
+    <string name="text_input_name">Como você prefere que te chamemos?</string>
+    <string name="choose_avatar">Escolha um avatar que combine com você</string>
+    <string name="continuar">Continuar</string>
+
+
+
+
     <string-array name="casa_abas">
         <item>Tarefas</item>
         <item>Regras</item>

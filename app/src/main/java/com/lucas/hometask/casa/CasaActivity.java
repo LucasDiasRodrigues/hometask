@@ -61,7 +61,6 @@ public class CasaActivity extends AppCompatActivity {
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
             }
 
             @Override
@@ -71,8 +70,8 @@ public class CasaActivity extends AppCompatActivity {
 
             @Override
             public void onPageScrollStateChanged(int state) {
-
             }
+
         });
 
         tabLayout = findViewById(R.id.tabLayout);

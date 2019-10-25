@@ -39,7 +39,7 @@ public class CadastroCasaAdapter extends RecyclerView.Adapter<CadastroCasaAdapte
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.casa_item_list, parent, false);
+        View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list_casa, parent, false);
         return new MyViewHolder(layout);
     }
 

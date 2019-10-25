@@ -76,10 +76,10 @@ public class LiveDatabase {
                 });
     }
 
-    private void createUser(Usuario usuario) {
+    public void createUser(Usuario usuario) {
         DatabaseReference usuarioRef = database.getReference(PATH_USUARIOS).child(usuario.getId());
         usuarioRef.child(FIELD_USUARIO_NOME).setValue(usuario.getNome());
-        //usuarioRef.child(FIELD_USUARIO_IMAGEM).setValue(usuario.getNome());
+        usuarioRef.child(FIELD_USUARIO_IMAGEM).setValue(usuario.getImagem());
     }
 
     public void createNewCasa(Casa casa) {
@@ -107,12 +107,7 @@ public class LiveDatabase {
         usuarioRef.child(FIELD_USUARIO_CASA).setValue(casa.getId());
     }
 
-//    public void getUserData(Usuario usuario, ValueEventListener listener) {
-//        database.getReference(PATH_USUARIOS).child(usuario.getId()).addListenerForSingleValueEvent(listener);
-//    }
-
-
-    private void updateUserData(final Usuario user) {
+    private void getUpdateUserData(final Usuario user) {
         if (getUsuario() == null) this.usuario = user;
         else getUsuario().setId(user.getId());
 
@@ -170,7 +165,7 @@ public class LiveDatabase {
     }
 
     public void getPersistentUserData(Usuario usuario) {
-        updateUserData(usuario);
+        getUpdateUserData(usuario);
     }
 
     public Usuario getUsuario() {
