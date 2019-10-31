@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.lucas.hometask.LiveDatabase;
@@ -18,6 +19,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class CadastroUsuarioFragment extends Fragment {
 
+    public static final String TAG_ON_BACKSTACK = "CadastroUsuario";
+
+    private MaterialToolbar toolbar;
     private View containerHasName;
     private View containerHasNotName;
     private TextInputEditText textName;
@@ -30,7 +34,7 @@ public class CadastroUsuarioFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if(getArguments() != null){
+        if (getArguments() != null) {
             usuario = (Usuario) getArguments().getSerializable("usuario");
         }
 
@@ -45,17 +49,24 @@ public class CadastroUsuarioFragment extends Fragment {
         return view;
     }
 
-    private void setupInterface(View view){
+    private void setupInterface(View view) {
+        toolbar = view.findViewById(R.id.toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (getActivity() != null) getActivity().getSupportFragmentManager().popBackStack();
+            }
+        });
         containerHasName = view.findViewById(R.id.hasNameLayout);
         containerHasNotName = view.findViewById(R.id.hasNotNameLayout);
         textName = view.findViewById(R.id.editTextNome);
         recyclerView = view.findViewById(R.id.recycler_view);
-        btnContinue.findViewById(R.id.btnContinue);
+        btnContinue = view.findViewById(R.id.btnContinue);
         btnContinue.setOnClickListener(onClickContinue());
     }
 
-    private View.OnClickListener onClickContinue(){
-        return  new View.OnClickListener() {
+    private View.OnClickListener onClickContinue() {
+        return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 LiveDatabase.getInstance().createUser(usuario);

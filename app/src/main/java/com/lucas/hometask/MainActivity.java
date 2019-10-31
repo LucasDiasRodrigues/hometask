@@ -15,13 +15,18 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.lucas.hometask.casa.CadastroCasaActivity;
 import com.lucas.hometask.casa.CasaActivity;
+import com.lucas.hometask.login.CadastroUsuarioFragment;
 import com.lucas.hometask.login.LoginActivity;
 import com.lucas.hometask.model.Casa;
 import com.lucas.hometask.model.Usuario;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.Menu;
 import android.view.MenuItem;
@@ -81,27 +86,7 @@ public class MainActivity extends AppCompatActivity implements LiveDatabase.Data
 
     public void getUserData() {
         database.getPersistentUserData(usuario);
-//        database.getUserData(usuario, new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                if(dataSnapshot.child("casa").getValue() != null) {
-//                    usuario.setIdCasa((String) dataSnapshot.child("casa").getValue());
-//                    hasHouse = true;
-//                } else {
-//                    hasHouse = false;
-//                }
-//
-//                findViewById(R.id.btnCadastroCasa).setEnabled(!hasHouse);
-//                findViewById(R.id.btnHomecasa).setEnabled(hasHouse);
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//                hasHouse = false;
-//            }
-//        });
     }
-
 
     public void onClickCadastrarCasa(View view) {
         startActivity(new Intent(MainActivity.this, CadastroCasaActivity.class));
@@ -111,6 +96,22 @@ public class MainActivity extends AppCompatActivity implements LiveDatabase.Data
         startActivity(new Intent(MainActivity.this, CasaActivity.class));
     }
 
+    public void onClickCadastroUsuario(View view) {
+        CadastroUsuarioFragment fragment = new CadastroUsuarioFragment();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("usuario", usuario);
+        fragment.setArguments(bundle);
+        openFragment(fragment, CadastroUsuarioFragment.TAG_ON_BACKSTACK);
+    }
+
+    private void openFragment(Fragment fragment, String tag ) {
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.setCustomAnimations(R.anim.frag_enter,R.anim.frag_exit,R.anim.frag_enter,R.anim.frag_exit);
+        transaction.replace(R.id.fragmentContainer, fragment, tag);
+        transaction.addToBackStack(tag);
+        transaction.commitAllowingStateLoss();
+    }
 
     @Override
     public void onUserDataChanged(Usuario usuario) {
