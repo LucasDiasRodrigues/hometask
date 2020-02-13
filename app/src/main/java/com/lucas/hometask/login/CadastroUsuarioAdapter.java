@@ -1,5 +1,6 @@
-package com.lucas.hometask.casa;
+package com.lucas.hometask.login;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,16 +13,18 @@ import java.util.ArrayList;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class CadastroCasaAdapter extends RecyclerView.Adapter<CadastroCasaAdapter.MyViewHolder> {
+public class CadastroUsuarioAdapter extends RecyclerView.Adapter<CadastroUsuarioAdapter.MyViewHolder> {
 
     ArrayList<Integer> list;
     Integer selectedPosition;
 
     OnItemClickListener callback;
+    Context context;
 
-    public CadastroCasaAdapter(ArrayList<Integer> list, OnItemClickListener callback) {
+    public CadastroUsuarioAdapter(OnItemClickListener callback, Context context) {
         this.callback = callback;
-        //this.list = list;
+        this.context = context;
+
         selectedPosition = -1;
         this.list = new ArrayList<>();
         this.list.add(1);
@@ -34,12 +37,26 @@ public class CadastroCasaAdapter extends RecyclerView.Adapter<CadastroCasaAdapte
         this.list.add(8);
         this.list.add(9);
         this.list.add(10);
+        this.list.add(11);
+        this.list.add(12);
+        this.list.add(13);
+        this.list.add(14);
+        this.list.add(15);
+        this.list.add(16);
+        this.list.add(17);
+        this.list.add(18);
+        this.list.add(19);
+        this.list.add(20);
+        this.list.add(21);
+        this.list.add(22);
+        this.list.add(23);
+        this.list.add(24);
     }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list_casa, parent, false);
+        View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list_avatar, parent, false);
         return new MyViewHolder(layout);
     }
 
@@ -50,39 +67,8 @@ public class CadastroCasaAdapter extends RecyclerView.Adapter<CadastroCasaAdapte
                 View.VISIBLE :
                 View.GONE);
 
-
-        switch (list.get(position)) {
-            case 1:
-                holder.imageView.setImageResource(R.drawable.house_1);
-                break;
-            case 2:
-                holder.imageView.setImageResource(R.drawable.house_2);
-                break;
-            case 3:
-                holder.imageView.setImageResource(R.drawable.house_3);
-                break;
-            case 4:
-                holder.imageView.setImageResource(R.drawable.house_4);
-                break;
-            case 5:
-                holder.imageView.setImageResource(R.drawable.house_1);
-                break;
-            case 6:
-                holder.imageView.setImageResource(R.drawable.house_2);
-                break;
-            case 7:
-                holder.imageView.setImageResource(R.drawable.house_3);
-                break;
-            case 8:
-                holder.imageView.setImageResource(R.drawable.house_4);
-                break;
-            case 9:
-                holder.imageView.setImageResource(R.drawable.house_1);
-                break;
-            case 10:
-                holder.imageView.setImageResource(R.drawable.house_2);
-                break;
-        }
+        holder.imageView.setImageResource(
+                context.getResources().getIdentifier("avatar_" + (position + 1), "drawable", context.getPackageName()));
     }
 
     @Override
@@ -110,19 +96,18 @@ public class CadastroCasaAdapter extends RecyclerView.Adapter<CadastroCasaAdapte
         }
     }
 
-    public void changeSelectedItem(int adapterposition){
+    public void changeSelectedItem(int adapterposition) {
         int unselectedPosition = -1;
         if (selectedPosition != -1)
             unselectedPosition = selectedPosition;
         selectedPosition = adapterposition;
 
         if (unselectedPosition != -1)
-            CadastroCasaAdapter.this.notifyItemChanged(unselectedPosition);
+            this.notifyItemChanged(unselectedPosition);
     }
 
     public interface OnItemClickListener {
         void onListClick(Integer integer);
     }
+
 }
-
-

@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements LiveDatabase.Data
         Bundle bundle = new Bundle();
         bundle.putSerializable("usuario", usuario);
         fragment.setArguments(bundle);
-        openFragment(fragment, CadastroUsuarioFragment.TAG_ON_BACKSTACK);
+        openFragment(fragment, CadastroUsuarioFragment.Companion.getTAG_ON_BACKSTACK());
     }
 
     private void openFragment(Fragment fragment, String tag ) {
